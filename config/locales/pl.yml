@@ -4,3 +4,8 @@ pl:
       user:
         password: Hasło
         password_confirmation: Powtórz hasło
+      book:
+        title: Tytuł
+        author: Autor
+        description: Opis
+        reserved: Zarezerwowana

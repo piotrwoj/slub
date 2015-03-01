@@ -1,14 +1,16 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+<% end %>
 
-<h1>Listing Books</h1>
+<h1>Lista książek</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Reserved</th>
-      <th>Author</th>
+      <th>Tytuł</th>
+      <th>Opis</th>
+      <th>Zarezerwowana</th>
+      <th>Autor</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,9 +22,9 @@
         <td><%= book.description %></td>
         <td><%= book.reserved %></td>
         <td><%= book.author %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Pokaż', book %></td>
+        <td><%= link_to 'Edytuj', edit_book_path(book) %></td>
+        <td><%= link_to 'Usuń', book, method: :delete, data: { confirm: 'Na pewno usunąć?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Book', new_book_path %>
+<%= link_to 'Dodaj książkę', new_book_path %>

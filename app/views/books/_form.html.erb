@@ -1,7 +1,7 @@
 <%= form_for(@book) do |f| %>
   <% if @book.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <h2><%= pluralize(@book.errors.count, "error") %> nie pozwoliły na zapisanie książki:</h2>
 
       <ul>
       <% @book.errors.full_messages.each do |message| %>
@@ -28,6 +28,6 @@
     <%= f.text_field :author %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Zapisz' %>
   </div>
 <% end %>
