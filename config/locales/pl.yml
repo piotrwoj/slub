@@ -1,0 +1,6 @@
+pl:
+  activerecord:
+    attributes:
+      user:
+        password: Hasło
+        password_confirmation: Powtórz hasło
