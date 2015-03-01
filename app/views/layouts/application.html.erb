@@ -5,10 +5,162 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <style>
+  	html{
+  		min-height:100%;
+  	}
+
+  	body{
+  		background-color: #d4bb6c;
+  		height: 100%;
+  	}
+
+      #container {
+        margin-left: auto;
+	    margin-right: auto;
+	    width: 700px;
+	    height: 100%;
+	    background-color: #e6d7a9;
+      }
+
+    #photo{
+    	width: 100%;
+    	height: 100%;
+    }
+
+    #photo_div{
+    	height: 300px;
+    }
+
+    #menu{
+    	width: 100%;
+    }
+
+    #data{
+    	width: 100%;
+    	padding: 10px;
+    	clear: both;
+    }
+
+
+
+    #menu ul {
+	    float: center;
+	    width: 100%;
+	    padding: 0;
+	    margin: 0;
+	    list-style-type: none;
+
+	}
+
+	#menu a {
+	    float: center;
+	    font-size: 1em;
+	    color: white;
+	    background-color: purple;
+	    padding: 1em 1em 1em 1em;
+	    border: 1px solid black;
+	    //font-weight: bold;
+	    text-decoration: none;
+	}
+
+	#menu a:hover {
+	    background-color: fuchsia;
+	}
+
+	#menu li {
+	    display: inline;
+	}
+
+  </style>
+
 </head>
 <body>
 
-<%= yield %>
+<div id='container'>
+	<div id='photo_div'>
+		<%= image_tag "flowers-260894_1280.jpg", id: 'photo' %>
+	</div>
+	<div id='menu'>
+		<ul>
+			<li>
+				<%= link_to 'Strona główna', root_url %>
+			</li>
+			<li>
+				<%= link_to 'Ceremonia ślubna', ceremonia_url %>
+			</li>
+			<li>
+				<%= link_to 'Zamiast kwiatów', books_url %>
+			</li>
+		</ul>
+	</div>
+	<div id='data'>
+	<%= yield %>
+
+
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+		x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+		x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	x<br>
+	y<br>
+	</div>
+</div>
 
 </body>
 </html>
