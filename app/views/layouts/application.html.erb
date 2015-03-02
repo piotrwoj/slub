@@ -8,21 +8,23 @@
 
   <style>
   	html{
-  		min-height:100%;
+  		height:100%;
   	}
 
   	body{
   		background-color: #d4bb6c;
   		height: 100%;
+  		padding: 5px;
   	}
 
-      #container {
-        margin-left: auto;
-	    margin-right: auto;
-	    width: 700px;
-	    height: 100%;
-	    background-color: #e6d7a9;
-      }
+  	#container {
+    	margin-right:auto;
+    	margin-left:auto;
+    	width: 700px;
+    	min-height: calc(100% - 20px);
+    	background-color: #e6d7a9;
+    	box-shadow: 10px 10px 10px 5px #888888;
+  	}
 
     #photo{
     	width: 100%;
@@ -40,10 +42,9 @@
     #data{
     	width: 100%;
     	padding: 10px;
+    	padding-top: 30px;
     	clear: both;
     }
-
-
 
     #menu ul {
 	    float: center;
@@ -54,14 +55,13 @@
 
 	}
 
-	#menu a {
+	#menu li a {
 	    float: center;
 	    font-size: 1em;
 	    color: white;
 	    background-color: purple;
 	    padding: 1em 1em 1em 1em;
 	    border: 1px solid black;
-	    //font-weight: bold;
 	    text-decoration: none;
 	}
 
@@ -71,6 +71,10 @@
 
 	#menu li {
 	    display: inline;
+	}
+
+	fieldset{
+		width: 655px;
 	}
 
   </style>
@@ -93,12 +97,18 @@
 			<li>
 				<%= link_to 'Zamiast kwiatów', books_url %>
 			</li>
+			<% if logged? %>
+			<li>
+				<%= link_to 'Użytkownicy', users_url %>
+			</li>
+			<%= link_to 'Wyloguj się', logout_url %>
+			<% end %>
 		</ul>
 	</div>
 	<div id='data'>
 	<%= yield %>
 
-
+	<!-- x<br>
 	x<br>
 	x<br>
 	x<br>
@@ -119,7 +129,6 @@
 	x<br>
 	x<br>
 	x<br>
-		x<br>
 	x<br>
 	x<br>
 	x<br>
@@ -139,7 +148,6 @@
 	x<br>
 	x<br>
 	x<br>
-		x<br>
 	x<br>
 	x<br>
 	x<br>
@@ -158,7 +166,8 @@
 	x<br>
 	x<br>
 	x<br>
-	y<br>
+	x<br>
+	y<br> -->
 	</div>
 </div>
 
