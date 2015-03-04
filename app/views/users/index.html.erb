@@ -18,7 +18,7 @@
       <tr>
         <td><%= user.login %></td>
         <td><%= link_to 'Pokaż', user %></td>
-        <td><%= link_to 'Edtuj', edit_user_path(user) %></td>
+        <td><%= link_to 'Edytuj', edit_user_path(user) %></td>
         <td><%= link_to 'Usuń', user, method: :delete, data: { confirm: 'Na pewno usunąć?' } %></td>
       </tr>
     <% end %>

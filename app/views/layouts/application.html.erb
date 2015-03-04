@@ -101,11 +101,11 @@
 			<li>
 				<%= link_to 'Użytkownicy', users_url %>
 			</li>
-			<%= link_to 'Wyloguj się', logout_url %>
+			<%= link_to 'Wyloguj się', logout_url, method: :delete %>
 			<% end %>
 		</ul>
 	</div>
-	<div id='data'>
+	<div id='data' class='<%= controller.controller_name %>'>
 	<%= yield %>
 
 	<!-- x<br>

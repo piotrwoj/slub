@@ -1,13 +1,13 @@
 # -*- encoding : utf-8 -*-
 
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authorize, only: [:index, :show]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :reserve]
+  skip_before_filter :authorize, only: [:index, :show, :reserve]
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.order(:title).all
   end
 
   # GET /books/1
@@ -61,6 +61,21 @@ class BooksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to books_url, notice: "Ksiażka \"#{@book.title}\" została usunięta." }
       format.json { head :no_content }
+      format.js {render js: "$('#tr#{@book.id}').fadeOut();"}
+    end
+  end
+
+  def reserve
+    @book.with_lock do
+      if @book.reserved?
+        render js: "alert('Ta książka została już rarezerwowana!')"
+      else
+        if @book.update_attribute(:reserved, true)
+          render js: "alert('Rezerwacja powiodła się!')" #todo zmiana przycisku
+        else
+          render js: "alert('Rezerwacja nie powiodła się!')"
+        end
+      end
     end
   end
 

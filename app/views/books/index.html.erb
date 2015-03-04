@@ -9,24 +9,32 @@
     <tr>
       <th>Tytuł</th>
       <th>Autor</th>
-      <!-- <th>Opis</th> -->
-      <th>Zarezerwowana</th>
-      <th colspan="3"></th>
+      <th>Rezerwacja</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
+      <tr id="tr<%= book.id %>">
+        <td><%= link_to book.title, book %></td>
         <td><%= book.author %></td>
-        <!-- <td><%= book.description %></td> -->
-        <td><%= book.reserved %></td>
-        <td><%= link_to 'Pokaż', book %></td>
+        <td style="text-align:center">
+          <% if book.reserved? %>
+          TAK
+          <% else %>
+          <%= button_to 'Rezerwuj', reserve_book_url(book), remote: true %>
+          <% end %>
+        </td>
+
+        <td>
+        <%= link_to 'Pokaż', book %>
         <% if logged? %>
-        <td><%= link_to 'Edytuj', edit_book_path(book) %></td>
-        <td><%= link_to 'Usuń', book, method: :delete, data: { confirm: 'Na pewno usunąć?' } %></td>
+        <%= link_to 'Edytuj', edit_book_path(book) %>
+        <%= link_to 'Usuń', book, remote: true, method: :delete, data: { confirm: 'Na pewno usunąć?' } %>
         <% end %>
+        </td>
+
       </tr>
     <% end %>
   </tbody>

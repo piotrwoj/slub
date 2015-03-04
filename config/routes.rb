@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
 
   resources :users
-  resources :books
+  resources :books do
+    member do
+      post :reserve
+    end
+  end
 
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
-    get 'logout' => :destroy #do testow
   end
 
   root 'main#index'

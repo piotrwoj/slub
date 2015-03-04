@@ -11,16 +11,17 @@
 </p>
 
 <p>
-  <strong>Zarezerwowana:</strong>
-  <%= @book.reserved %>
-</p>
-
-<p>
   <strong>Autor:</strong>
   <%= @book.author %>
 </p>
 
+<p>
+  <strong>Zarezerwowana:</strong>
+  <%= @book.reserved %>
+</p>
+
 <% if logged? %>
 <%= link_to 'Edytuj', edit_book_path(@book) %> |
+<%= link_to 'Usuń', book_path(@book), method: :delete, data: { confirm: 'Na pewno usunąć?' } %> |
 <% end %>
 <%= link_to 'Wróć', books_path %>

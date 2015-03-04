@@ -3,4 +3,5 @@
 <%= render 'form' %>
 
 <%= link_to 'Pokaż', @book %> |
+<%= link_to 'Usuń', book_path(@book), method: :delete, data: { confirm: 'Na pewno usunąć?' } %> |
 <%= link_to 'Anuluj', books_path %>
