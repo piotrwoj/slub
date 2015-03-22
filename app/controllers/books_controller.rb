@@ -1,13 +1,13 @@
 # -*- encoding : utf-8 -*-
 
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :reserve]
-  skip_before_filter :authorize, only: [:index, :show, :reserve]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :make_reservation, :cancel_reservation]
+  skip_before_filter :authorize, only: [:index, :show, :make_reservation, :cancel_reservation]
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.order(:title).all
+    @books = Book.order(:title).includes(:reservations).all
   end
 
   # GET /books/1
@@ -65,15 +65,36 @@ class BooksController < ApplicationController
     end
   end
 
-  def reserve
+  def make_reservation
     @book.with_lock do
       if @book.reserved?
-        render js: "alert('Ta książka została już rarezerwowana!')"
+        render js: "alert('Ta książka została już zarezerwowana!')"
       else
-        if @book.update_attribute(:reserved, true)
-          render js: "alert('Rezerwacja powiodła się!')" #todo zmiana przycisku
+        if (reservation = @book.reservations.create(ip: request.ip))
+          if session[:reservation_ids].blank?
+            session[:reservation_ids] = [reservation.id]
+          else
+            session[:reservation_ids] << reservation.id
+          end
+          render js: "$('#make_reservation_button_#{@book.id}').hide(); $('#cancel_reservation_button_#{@book.id}').show();"
         else
           render js: "alert('Rezerwacja nie powiodła się!')"
+        end
+      end
+    end
+  end
+
+  def cancel_reservation
+    @book.with_lock do
+      if !@book.reserved?
+        render js: "alert('Ta książka nie jest rarezerwowana!')"
+      elsif !@book.my?(session)
+        render js: "alert('Nie możesz anulować nie swojej rezerwacji!')"
+      else
+        if @book.reservations.find{|r| session[:reservation_ids].include?(r.id) && !r.canceled}.update_attribute(:canceled, true)
+          render js: "$('#make_reservation_button_#{@book.id}').show(); $('#cancel_reservation_button_#{@book.id}').hide();"
+        else
+          render js: "alert('Anulowanie rezerwacji nie powiodło się!')"
         end
       end
     end
@@ -82,7 +103,7 @@ class BooksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
-      @book = Book.find(params[:id])
+      @book = Book.includes(:reservations).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

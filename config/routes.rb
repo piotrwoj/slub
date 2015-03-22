@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :users
   resources :books do
     member do
-      post :reserve
+      post :make_reservation
+      post :cancel_reservation
     end
   end
 

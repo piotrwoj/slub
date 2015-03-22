@@ -20,10 +20,11 @@
         <td><%= link_to book.title, book %></td>
         <td><%= book.author %></td>
         <td style="text-align:center">
-          <% if book.reserved? %>
-          TAK
+          <% if book.reserved? && !book.my?(session) %>
+            TAK
           <% else %>
-          <%= button_to 'Rezerwuj', reserve_book_url(book), remote: true %>
+            <%= button_to 'Anuluj rezerwację', cancel_reservation_book_url(book), remote: true, id: "cancel_reservation_button_#{book.id}", class: "#{'hidden' if !book.my?(session)}" %>
+            <%= button_to 'Rezerwuj', make_reservation_book_url(book), remote: true, id: "make_reservation_button_#{book.id}", class: "#{'hidden' if book.reserved?}" %>
           <% end %>
         </td>
 

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def logged?
-		User.find_by(id: session[:user_id])
+		session[:user_id] and User.find_by(id: session[:user_id])
 	end
 
 end

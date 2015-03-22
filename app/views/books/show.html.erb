@@ -17,8 +17,15 @@
 
 <p>
   <strong>Zarezerwowana:</strong>
-  <%= @book.reserved %>
+  <%= @book.reserved? %>
 </p>
+
+<% if logged? %>
+<!-- <p>
+  <strong>IP:</strong>
+  <%#= @book.ip %>
+</p> -->
+<% end %>
 
 <% if logged? %>
 <%= link_to 'Edytuj', edit_book_path(@book) %> |
