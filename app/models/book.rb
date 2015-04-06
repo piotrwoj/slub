@@ -12,3 +12,15 @@ class Book < ActiveRecord::Base
 		return !Reservation.where(canceled: false, book_id: self.id, id: session[:reservation_ids]).blank? 
 	end
 end
+
+# == Schema Information
+#
+# Table name: books
+#
+#  id          :integer          not null, primary key
+#  title       :string           not null
+#  description :text
+#  author      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#

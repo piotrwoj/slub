@@ -11,3 +11,15 @@ two:
   description: MyText
   reserved: false
   author: MyString
+
+# == Schema Information
+#
+# Table name: books
+#
+#  id          :integer          not null, primary key
+#  title       :string           not null
+#  description :text
+#  author      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
