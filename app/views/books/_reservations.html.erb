@@ -1,0 +1,21 @@
+<h4>Historia rezerwacji (<%= @book.reservations.size %>)</h4>
+<table>
+	<thead>
+		<tr>
+			<th>Data utworzenia</th>
+			<th>Data ostatniej zmiany</th>
+			<th>IP</th>
+			<th>Anulowane</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @book.reservations.sort_by{|a| a.created_at}.reverse.each_with_index do |r, i| %>
+		<tr>		
+			<td><%= l(r.created_at) %></td>
+			<td><%= l(r.updated_at) %></td>
+			<td><%= r.ip %></td>
+			<td><%= r.canceled %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

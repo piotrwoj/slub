@@ -1,4 +1,5 @@
 zablokowac mozliwosc zerezrwacji/anulowania gdy ciasteczka sa wylaczone
 jednak mozna zarezerwowac tylko jedna ksiazke
-moze po prostu trzymac session_id w rezerwacji albo nawet przy ksiazce?
 opcja wylaczenia (zakonczenia/przerwania) rezerwacji?
+zamiast uzytkownik/uzytkownicy to admin/admini
+historia rezerwacji w shole ksiazki dla adminow

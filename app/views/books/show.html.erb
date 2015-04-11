@@ -20,15 +20,20 @@
   <%= @book.reserved? %>
 </p>
 
-<% if logged? %>
-<!-- <p>
-  <strong>IP:</strong>
-  <%#= @book.ip %>
-</p> -->
+<% if admin? %>
+<p>
+  <strong>Ukryta notatka:</strong>
+  <%= @book.hidden_note %>
+</p>
 <% end %>
 
-<% if logged? %>
+<% if admin? %>
 <%= link_to 'Edytuj', edit_book_path(@book) %> |
 <%= link_to 'Usuń', book_path(@book), method: :delete, data: { confirm: 'Na pewno usunąć?' } %> |
 <% end %>
 <%= link_to 'Wróć', books_path %>
+
+<% if admin? %>
+  <br><br>
+  <%= render 'reservations' %>
+<% end %>

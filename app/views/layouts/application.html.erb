@@ -101,9 +101,9 @@
 			<li>
 				<%= link_to 'Zamiast kwiatów', books_url %>
 			</li>
-			<% if logged? %>
+			<% if admin? %>
 			<li>
-				<%= link_to 'Użytkownicy', users_url %>
+				<%= link_to 'Administratorzy', users_url %>
 			</li>
 			<%= link_to 'Wyloguj się', logout_url, method: :delete %>
 			<% end %>

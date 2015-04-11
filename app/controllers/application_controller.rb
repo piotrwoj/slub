@@ -6,17 +6,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authorize
 
-  helper_method :logged?
+  helper_method :admin?
 
   protected
 
 	def authorize
-		unless logged?
+		unless admin?
 			redirect_to login_url, notice: "Proszę się zalogować"
 		end
 	end
 
-	def logged?
+	def admin?
 		session[:user_id] and User.find_by(id: session[:user_id])
 	end
 

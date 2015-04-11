@@ -9,3 +9,7 @@ pl:
         author: Autor
         description: Opis
         reserved: Zarezerwowana
+        hidden_note: Ukryta notatka
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M"

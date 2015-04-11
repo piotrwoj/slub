@@ -41,7 +41,16 @@ GEM
       rake (~> 10.4)
     arel (6.0.0)
     bcrypt (3.1.9)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    byebug (4.0.5)
+      columnize (= 0.9.0)
+    coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -49,6 +58,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1)
+    columnize (0.9.0)
+    debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.3.0)
     globalid (0.3.3)
@@ -140,6 +151,9 @@ PLATFORMS
 DEPENDENCIES
   annotate (~> 2.6.6)
   bcrypt (~> 3.1.7)
+  better_errors
+  binding_of_caller
+  byebug
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails

@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.order(:title).includes(:reservations).all
+    @books = Book.order(:title).includes(:reservations)
   end
 
   # GET /books/1
@@ -22,35 +22,27 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @book.reserved = @book.reserved?
   end
 
   # POST /books
   # POST /books.json
   def create
     @book = Book.new(book_params)
-
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to books_url, notice: "Książka \"#{@book.title}\" została zapisana" }
-        format.json { render :show, status: :created, location: @book }
-      else
-        format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.save
+      redirect_to books_url, notice: "Książka \"#{@book.title}\" została zapisana"
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to books_url, notice: "Książka \"#{@book.title}\" została zaktualizowana." }
-        format.json { render :show, status: :ok, location: @book }
-      else
-        format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.update(book_params)
+      redirect_to books_url, notice: "Książka \"#{@book.title}\" została zaktualizowana."
+    else
+      render :edit
     end
   end
 
@@ -60,22 +52,20 @@ class BooksController < ApplicationController
     @book.destroy
     respond_to do |format|
       format.html { redirect_to books_url, notice: "Ksiażka \"#{@book.title}\" została usunięta." }
-      format.json { head :no_content }
       format.js {render js: "$('#tr#{@book.id}').fadeOut();"}
     end
   end
 
   def make_reservation
+    if Book.get_my(session)
+      return render js: "alert('Zarezerwowałeś już jedną książkę!')"
+    end
     @book.with_lock do
       if @book.reserved?
         render js: "alert('Ta książka została już zarezerwowana!')"
       else
         if (reservation = @book.reservations.create(ip: request.ip))
-          if session[:reservation_ids].blank?
-            session[:reservation_ids] = [reservation.id]
-          else
-            session[:reservation_ids] << reservation.id
-          end
+          session[:reservation_id] = reservation.id
           render js: "$('#make_reservation_button_#{@book.id}').hide(); $('#cancel_reservation_button_#{@book.id}').show();"
         else
           render js: "alert('Rezerwacja nie powiodła się!')"
@@ -91,7 +81,9 @@ class BooksController < ApplicationController
       elsif !@book.my?(session)
         render js: "alert('Nie możesz anulować nie swojej rezerwacji!')"
       else
-        if @book.reservations.find{|r| session[:reservation_ids].include?(r.id) && !r.canceled}.update_attribute(:canceled, true)
+        r = Reservation.where(id: session[:reservation_id], canceled: false).first
+        if r && r.update_attribute(:canceled, true)
+          session[:reservation_id] = nil
           render js: "$('#make_reservation_button_#{@book.id}').show(); $('#cancel_reservation_button_#{@book.id}').hide();"
         else
           render js: "alert('Anulowanie rezerwacji nie powiodło się!')"

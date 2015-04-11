@@ -19,10 +19,14 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <!-- <div class="field">
-    <%#= f.label :reserved %><br>
-    <%#= f.check_box :reserved %>
-  </div> -->
+  <div class="field">
+    <%= f.label :hidden_note %><br>
+    <%= f.text_area :hidden_note %>
+  </div>
+  <div class="field">
+    <%= f.label :reserved %><br>
+    <%= f.check_box :reserved, onchange: "alert('Zmiana tego pola spowoduje anulowanie istniejącej rezerwacji lub dodanie nowej')" %>
+  </div>
   <div class="field">
     <%= f.label :author %><br>
     <%= f.text_field :author %>
