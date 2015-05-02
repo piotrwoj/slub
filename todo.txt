@@ -1,5 +1,5 @@
 zablokowac mozliwosc zerezrwacji/anulowania gdy ciasteczka sa wylaczone
-	jednak mozna zarezerwowac tylko jedna ksiazke
+jednak mozna zarezerwowac tylko jedna ksiazke
 opcja wylaczenia (zakonczenia/przerwania) rezerwacji?
-	zamiast uzytkownik/uzytkownicy to admin/admini
-	historia rezerwacji w shole ksiazki dla adminow
+zamiast uzytkownik/uzytkownicy to admin/admini
+historia rezerwacji w shole ksiazki dla adminow

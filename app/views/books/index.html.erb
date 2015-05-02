@@ -1,9 +1,6 @@
 <% if notice %>
 <p id="notice"><%= notice %></p>
 <% end %>
-<% if alert %>
-<p id="alert"><%= alert %></p>
-<% end %>
 
 <h1>Lista książek</h1>
 
@@ -25,18 +22,11 @@
         <td><%= link_to book.title, book %></td>
         <td><%= book.author %></td>
         <td style="text-align:center">
-          <% if book.reserved? %>
-            <% if book != my_book %>
-              TAK
-            <% else %>
-              <%= button_to 'Anuluj rezerwację', cancel_reservation_book_url(book) %>
-            <% end %>
+          <% if book.reserved? && book != my_book %>
+            TAK
           <% else %>
-            <% if my_book %>
-              NIE
-            <% else %>
-              <%= button_to 'Rezerwuj', make_reservation_book_url(book) %>
-            <% end %>
+            <%= button_to 'Anuluj rezerwację', cancel_reservation_book_url(book), remote: true, id: "cancel_reservation_button_#{book.id}", class: "#{'hidden' if book != my_book}" %>
+            <%= button_to 'Rezerwuj', make_reservation_book_url(book), remote: true, id: "make_reservation_button_#{book.id}", class: "#{'hidden' if book.reserved?}" %>
           <% end %>
         </td>
 

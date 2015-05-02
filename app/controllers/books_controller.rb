@@ -58,41 +58,38 @@ class BooksController < ApplicationController
 
   def make_reservation
     if Book.get_my(session)
-      flash[:alert] = "Zarezerwowałeś już jedną książkę!"
-    else
-      @book.with_lock do
-        if @book.reserved?
-          flash[:alert] = "Ta książka została już zarezerwowana przez kogoś innego!"
+      return render js: "alert('Zarezerwowałeś już jedną książkę!')"
+    end
+    @book.with_lock do
+      if @book.reserved?
+        render js: "alert('Ta książka została już zarezerwowana!')"
+      else
+        if (reservation = @book.reservations.create(ip: request.ip))
+          session[:reservation_id] = reservation.id
+          render js: "$('#make_reservation_button_#{@book.id}').hide(); $('#cancel_reservation_button_#{@book.id}').show();"
         else
-          if (reservation = @book.reservations.create(ip: request.ip))
-            session[:reservation_id] = reservation.id
-            flash[:notice] = "Rezerwacja powiodła się"
-          else
-            flash[:alert] = "Rezerwacja nie powiodła się!"
-          end
+          render js: "alert('Rezerwacja nie powiodła się!')"
         end
       end
     end
-    redirect_to books_path
   end
 
   def cancel_reservation
     @book.with_lock do
       if !@book.reserved?
-        flash[:alert] =  "Ta książka nie jest rarezerwowana!"
+        render js: "alert('Ta książka nie jest rarezerwowana!')"
       elsif !@book.my?(session)
-        flash[:alert] = "Nie możesz anulować nie swojej rezerwacji!"
+        render js: "alert('Nie możesz anulować nie swojej rezerwacji!')"
       else
         r = Reservation.where(id: session[:reservation_id], canceled: false).first
         if r && r.update_attribute(:canceled, true)
           session[:reservation_id] = nil
-          flash[:notice] = "Anulowanie rezerwacji powiodło się"
+          render js: "$('#make_reservation_button_#{@book.id}').show(); $('#cancel_reservation_button_#{@book.id}').hide();"
         else
-          flash[:alert] = "Anulowanie rezerwacji nie powiodło się!"
+          render js: "alert('Anulowanie rezerwacji nie powiodło się!')"
         end
       end
     end
-    redirect_to books_path
   end
 
   private

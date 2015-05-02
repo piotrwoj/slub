@@ -28,7 +28,7 @@ class Book < ActiveRecord::Base
 
 	private
 
-	#manualna rezerwacja/anulowanie rezerwacji przez admina
+	#manualna rezerwacja/anulowanie rezerwacji przed admina
 	def create_reservation
     if !self.reserved? && self.reserved == '1'
     	self.reservations.create!
