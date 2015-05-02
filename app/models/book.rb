@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 class Book < ActiveRecord::Base
 	validates_uniqueness_of :title, presence: true, scope: :author
 

@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 class Reservation < ActiveRecord::Base
 	validates_presence_of :book_id
 
