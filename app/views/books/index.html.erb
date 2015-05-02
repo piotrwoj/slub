@@ -28,8 +28,9 @@
           <% if book.reserved? && book != my_book %>
             TAK
           <% else %>
-            <%= button_to 'Anuluj rezerwację', cancel_reservation_book_url(book), remote: true, id: "cancel_reservation_button_#{book.id}", class: "#{'hidden' if book != my_book}" %>
-            <%= button_to 'Rezerwuj', make_reservation_book_url(book), remote: true, id: "make_reservation_button_#{book.id}", class: "#{'hidden' if book.reserved?}" %>
+            <span id="not_reserved_mark_<%= book.id %>" class="not_reserved_mark">NIE</span>
+            <%= button_to 'Anuluj rezerwację', cancel_reservation_book_url(book), remote: true, id: "cancel_reservation_button_#{book.id}", class: "hidden" %>
+            <%= button_to 'Rezerwuj', make_reservation_book_url(book), remote: true, id: "make_reservation_button_#{book.id}", class: "hidden make_reservation_button" %>
           <% end %>
         </td>
 
@@ -51,3 +52,31 @@
 <% if admin? %>
 <%= link_to 'Dodaj książkę', new_book_path %>
 <% end %>
+
+<script type="text/javascript">
+
+function make_reservation(book_id){
+  $(".make_reservation_button").hide();
+  $(".not_reserved_mark").show();
+  $("#not_reserved_mark_" + book_id).hide();
+  $("#cancel_reservation_button_" + book_id).show();
+}
+
+function cancel_reservation(book_id){
+  $(".not_reserved_mark").hide();
+  $(".make_reservation_button").show();
+  if(book_id != -1)
+    $('#cancel_reservation_button_' + book_id).hide();
+}
+
+$(function(){
+  if(navigator.cookieEnabled){
+    <% if my_book %>
+      make_reservation(<%= my_book.id %>);
+    <% else %>
+      cancel_reservation(-1);
+    <% end %>
+  }
+})
+    
+</script>

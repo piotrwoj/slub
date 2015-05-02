@@ -58,17 +58,17 @@ class BooksController < ApplicationController
 
   def make_reservation
     if Book.get_my(session)
-      return render js: "alert('Zarezerwowałeś już jedną książkę!')"
+      return render js: "alert('Zarezerwowałeś już jedną książkę!'); location.reload();"
     end
     @book.with_lock do
       if @book.reserved?
-        render js: "alert('Ta książka została już zarezerwowana!')"
+        render js: "alert('Ta książka została już zarezerwowana!'); location.reload();"
       else
         if (reservation = @book.reservations.create(ip: request.ip))
           session[:reservation_id] = reservation.id
-          render js: "$('#make_reservation_button_#{@book.id}').hide(); $('#cancel_reservation_button_#{@book.id}').show();"
+          render js: "make_reservation(#{@book.id})"
         else
-          render js: "alert('Rezerwacja nie powiodła się!')"
+          render js: "alert('Rezerwacja nie powiodła się!'); location.reload();"
         end
       end
     end
@@ -77,16 +77,16 @@ class BooksController < ApplicationController
   def cancel_reservation
     @book.with_lock do
       if !@book.reserved?
-        render js: "alert('Ta książka nie jest rarezerwowana!')"
+        render js: "alert('Ta książka nie jest rarezerwowana!'); location.reload();"
       elsif !@book.my?(session)
-        render js: "alert('Nie możesz anulować nie swojej rezerwacji!')"
+        render js: "alert('Nie możesz anulować nie swojej rezerwacji!'); location.reload();"
       else
         r = Reservation.where(id: session[:reservation_id], canceled: false).first
         if r && r.update_attribute(:canceled, true)
           session[:reservation_id] = nil
-          render js: "$('#make_reservation_button_#{@book.id}').show(); $('#cancel_reservation_button_#{@book.id}').hide();"
+          render js: "cancel_reservation(#{@book.id})"
         else
-          render js: "alert('Anulowanie rezerwacji nie powiodło się!')"
+          render js: "alert('Anulowanie rezerwacji nie powiodło się!'); location.reload();"
         end
       end
     end
