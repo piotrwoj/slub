@@ -48,7 +48,7 @@
 <%= link_to 'Dodaj książkę', new_book_path %>
 <% end %>
 
-<% if Settings.reservations == 'on' %>
+<% if Settings.reservations == 'on' && !admin?%>
 <script type="text/javascript">
 
 function make_reservation(book_id){

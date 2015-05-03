@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <script src="https://maps.googleapis.com/maps/api/js"></script>
-  
+
   <style>
   	html{
   		height:100%;
@@ -90,6 +90,13 @@
 	    display: block;
 	}
 
+	#wierszyk {
+		text-align: center;
+		font-family: serif;
+		font-size: 150%;
+		line-height: 150%;
+	}
+
 
   </style>
 
@@ -120,6 +127,7 @@
 		</ul>
 	</div>
 	<div id='data' class='<%= controller.controller_name %>'>
+	<div style="clear:both"></div>
 	<%= yield %>
 
 	<!-- x<br>
