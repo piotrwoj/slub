@@ -1,1 +1,21 @@
 <h1>Tu będzie coś o ceremonii ślubnej</h1>
+
+<div style="clear:both"></div>
+<div id='map-canvas'></div>
+
+<script>
+$(function(){
+	var myLatlng = new google.maps.LatLng(52.092043, 21.251389);
+	var mapCanvas = document.getElementById('map-canvas');
+	var mapOptions = {
+      center: myLatlng,
+      zoom: 16
+    }
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map
+  });
+})
+</script>
