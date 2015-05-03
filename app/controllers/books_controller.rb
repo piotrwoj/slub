@@ -57,6 +57,7 @@ class BooksController < ApplicationController
   end
 
   def make_reservation
+    return render js: "alert('Zablokowano możliwość rezerwacji książek'); location.reload();" if Settings.reservations != 'on'
     if Book.get_my(session)
       return render js: "alert('Zarezerwowałeś już jedną książkę!'); location.reload();"
     end

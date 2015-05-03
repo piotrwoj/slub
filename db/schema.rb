@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411170148) do
+ActiveRecord::Schema.define(version: 20150503161008) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title",       null: false
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20150411170148) do
     t.boolean  "canceled",   default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.text     "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -25,3 +25,11 @@
 <br>
 
 <%= link_to 'Dodaj administratora', new_user_path %>
+
+<h1>Ustawienia</h1>
+
+<% if Settings.reservations == 'on' %>
+  <%= button_to 'Zablokuj możliwość rezerwacji książek', disable_reservations_url %>
+<% else %>
+  <%= button_to 'Włącz możliwość rezerwacji książek', enable_reservations_url %>
+<% end %>

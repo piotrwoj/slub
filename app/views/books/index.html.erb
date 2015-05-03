@@ -48,6 +48,7 @@
 <%= link_to 'Dodaj książkę', new_book_path %>
 <% end %>
 
+<% if Settings.reservations == 'on' %>
 <script type="text/javascript">
 
 function make_reservation(book_id){
@@ -75,3 +76,4 @@ $(function(){
 })
     
 </script>
+<% end %>

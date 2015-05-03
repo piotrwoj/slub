@@ -15,8 +15,12 @@ Rails.application.routes.draw do
   end
 
   root 'main#index'
-
   get 'ceremonia' => 'main#ceremony'
+
+  controller :main do
+    post :disable_reservations
+    post :enable_reservations
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
