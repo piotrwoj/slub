@@ -20,7 +20,7 @@
         <td><%= link_to book.title, book %></td>
         <td><%= book.author %></td>
         <td style="text-align:center">
-          <% if book.reserved? && book != my_book %>
+          <% if book.reserved? && (book != my_book || admin?) %>
             TAK
           <% else %>
             <span id="not_reserved_mark_<%= book.id %>" class="not_reserved_mark">NIE</span>

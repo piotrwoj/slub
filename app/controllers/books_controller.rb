@@ -63,7 +63,7 @@ class BooksController < ApplicationController
     end
     @book.with_lock do
       if @book.reserved?
-        render js: "alert('Ta książka została już zarezerwowana!'); location.reload();"
+        render js: "alert('Ta książka była już zarezerwowana!'); location.reload();"
       else
         if (reservation = @book.reservations.create(ip: request.ip))
           session[:reservation_id] = reservation.id
