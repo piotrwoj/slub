@@ -1,20 +1,40 @@
-<h1>Tu będzie coś o ceremonii ślubnej</h1>
+<h2>Jak dojechać z Warszawy?</h2>
+
+<ul>
+  <li>
+    MiniBusem (rozkład do pobrania <a href="http://minibus.com.pl/pdf/02.2015/tory_do_karczewa_02.2015.pdf">tutaj</a> i <a href="http://minibus.com.pl/pdf/02.2015/bis_do_karczewa_02.2015.pdf">tutaj</a>) <br>
+    przystanek: Karczew, Os. Ługi – pętla (ul. Bema)
+  </li>
+  <li>
+    SKM-ką → do Otwocka, dalej 4 przystanki MiniBusem
+  </li>
+  <li>
+    Samochodem - TODO
+  </li>
+</ul>
 
 <div id='map-canvas'></div>
 
 <script>
 $(function(){
-	var myLatlng = new google.maps.LatLng(52.092043, 21.251389);
+	var kosciol_Latlng = new google.maps.LatLng(52.092043, 21.251389);
+  var przystanek_Latlng = new google.maps.LatLng(52.086264, 21.257655);
 	var mapCanvas = document.getElementById('map-canvas');
 	var mapOptions = {
-      center: myLatlng,
+      center: kosciol_Latlng,
       zoom: 16
     }
     var map = new google.maps.Map(mapCanvas, mapOptions);
 
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map
-  });
+    var marker1 = new google.maps.Marker({
+      position: kosciol_Latlng,
+      map: map,
+      title: "Kościół"
+    });
+    var marker2 = new google.maps.Marker({
+      position: przystanek_Latlng,
+      map: map,
+      title: "Przystanek os. Ługi"
+    });
 })
 </script>

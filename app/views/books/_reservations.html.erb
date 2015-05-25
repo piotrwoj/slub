@@ -1,5 +1,5 @@
 <h4>Historia rezerwacji (<%= @book.reservations.size %>)</h4>
-<table>
+<table class="reservations_table">
 	<thead>
 		<tr>
 			<th>Data utworzenia</th>
@@ -14,7 +14,7 @@
 			<td><%= l(r.created_at) %></td>
 			<td><%= l(r.updated_at) %></td>
 			<td><%= r.ip %></td>
-			<td><%= r.canceled %></td>
+			<td><%= r.canceled ? "TAK" : "NIE" %></td>
 		</tr>
 	<% end %>
 	</tbody>

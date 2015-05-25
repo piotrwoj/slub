@@ -67,7 +67,7 @@ class BooksController < ApplicationController
       else
         if (reservation = @book.reservations.create(ip: request.ip))
           session[:reservation_id] = reservation.id
-          render js: "make_reservation(#{@book.id})"
+          render js: "make_reservation(#{@book.id}, \"#{@book.title}\", \"#{@book.author}\")"
         else
           render js: "alert('Rezerwacja nie powiodła się!'); location.reload();"
         end

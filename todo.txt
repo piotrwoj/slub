@@ -1,7 +1,5 @@
-	zablokowac mozliwosc zerezrwacji/anulowania gdy ciasteczka sa wylaczone
-	jednak mozna zarezerwowac tylko jedna ksiazke
-	opcja wylaczenia (zakonczenia/przerwania) rezerwacji?
-	zamiast uzytkownik/uzytkownicy to admin/admini
-	historia rezerwacji w shole ksiazki dla adminow
-	odswiezanie strony jak sie nie powiedzie rezerwacja/anulowanie!
-	przetestowac czy przechodza wszystkie parametry
+kalendarz z data na zdjeciu
+	na liscie ksiazek napisane u gory co sie zarezerwowalo i opcja odrezerwowania przy tym
+jak dojechac samochodem opis
+	na mapce znacznik przystanku minibusa
+	ostrzezenie o cookies? - chyba jednak nie

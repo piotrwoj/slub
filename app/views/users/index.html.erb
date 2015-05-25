@@ -1,6 +1,6 @@
 <%= flash_fields %>
 
-<h1>Lista administratorów</h1>
+<h2>Lista administratorów</h2>
 
 <table>
   <thead>
@@ -26,10 +26,11 @@
 
 <%= link_to 'Dodaj administratora', new_user_path %>
 
-<h1>Ustawienia</h1>
+<br>
+<h2>Ustawienia</h2>
 
 <% if Settings.reservations == 'on' %>
-  <%= button_to 'Zablokuj możliwość rezerwacji książek', disable_reservations_url %>
+  <%= button_to 'Zablokuj możliwość rezerwacji książek', disable_reservations_url, data: {confirm: "Czy na pewno?"} %>
 <% else %>
-  <%= button_to 'Włącz możliwość rezerwacji książek', enable_reservations_url %>
+  <%= button_to 'Włącz możliwość rezerwacji książek', enable_reservations_url, data: {confirm: "Czy na pewno?"} %>
 <% end %>

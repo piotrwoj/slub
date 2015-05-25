@@ -1,8 +1,23 @@
 <%= flash_fields %>
 
-<h1>Lista książek</h1>
+<h2>Lista książek<%="(#{@books.size})" if admin? %></h2>
 
-<table>
+<% my_book = Book.get_my(session)
+   session[:reservation_id] = nil unless my_book %>
+
+<% unless admin? %>
+<p>
+<div id="your_reservation">
+  <% if my_book %>
+    Twoja rezerwacja: "<%= my_book.title %>", <%= my_book.author %>
+  <% else %>
+    Nie zarezerwowałeś jeszcze książki
+  <% end %>
+</div>
+</p>
+<% end %>
+
+<table class="books_table<%= '_admin' if admin? %>">
   <thead>
     <tr>
       <th>Tytuł</th>
@@ -13,11 +28,9 @@
   </thead>
 
   <tbody>
-    <% my_book = Book.get_my(session)
-       session[:reservation_id] = nil unless my_book %>
     <% @books.each do |book| %>
       <tr id="tr<%= book.id %>">
-        <td><%= link_to book.title, book %></td>
+        <td><%= book.title %><%#= link_to book.title, book %></td>
         <td><%= book.author %></td>
         <td style="text-align:center">
           <% if book.reserved? && (book != my_book || admin?) %>
@@ -29,13 +42,13 @@
           <% end %>
         </td>
 
-        <td>
-        <%= link_to 'Pokaż', book %>
         <% if admin? %>
+        <td>
+        <%= link_to 'Pokaż', book %> 
         <%= link_to 'Edytuj', edit_book_path(book) %>
         <%= link_to 'Usuń', book, remote: true, method: :delete, data: { confirm: 'Na pewno usunąć?' } %>
-        <% end %>
         </td>
+        <% end %>
 
       </tr>
     <% end %>
@@ -51,11 +64,12 @@
 <% if Settings.reservations == 'on' && !admin?%>
 <script type="text/javascript">
 
-function make_reservation(book_id){
+function make_reservation(book_id, book_title, book_author){
   $(".make_reservation_button").hide();
   $(".not_reserved_mark").show();
   $("#not_reserved_mark_" + book_id).hide();
   $("#cancel_reservation_button_" + book_id).show();
+  $("#your_reservation").html("Twoja rezerwacja: \"" + book_title + "\", " + book_author);
 }
 
 function cancel_reservation(book_id){
@@ -63,12 +77,13 @@ function cancel_reservation(book_id){
   $(".make_reservation_button").show();
   if(book_id != -1)
     $('#cancel_reservation_button_' + book_id).hide();
+  $("#your_reservation").html("Nie zarezerwowałeś jeszcze książki");
 }
 
 $(function(){
   if(navigator.cookieEnabled){
     <% if my_book %>
-      make_reservation(<%= my_book.id %>);
+      make_reservation(<%= my_book.id %>, '<%= my_book.title %>', '<%= my_book.author %>');
     <% else %>
       cancel_reservation(-1);
     <% end %>

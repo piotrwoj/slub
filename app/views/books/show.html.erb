@@ -5,10 +5,12 @@
   <%= @book.title %>
 </p>
 
+<% if false %>
 <p>
   <strong>Opis:</strong>
   <%= @book.description %>
 </p>
+<% end %>
 
 <p>
   <strong>Autor:</strong>
@@ -17,7 +19,7 @@
 
 <p>
   <strong>Zarezerwowana:</strong>
-  <%= @book.reserved? %>
+  <%= @book.reserved? ? 'TAK' : 'NIE' %>
 </p>
 
 <% if admin? %>
