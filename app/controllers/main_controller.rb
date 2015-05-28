@@ -2,12 +2,12 @@
 
 class MainController < ApplicationController
 
-	skip_before_filter :authorize, only: [:index, :ceremony]
+	skip_before_filter :authorize, only: [:index, :directions]
 	
   def index
   end
 
-  def ceremony
+  def directions
   end
 
   def disable_reservations

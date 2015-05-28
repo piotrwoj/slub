@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   root 'main#index'
-  get 'ceremonia' => 'main#ceremony'
+  get 'dojazd' => 'main#directions'
 
   controller :main do
     post :disable_reservations

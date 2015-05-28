@@ -6,8 +6,8 @@ class MainControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get ceremony" do
-    get :ceremony
+  test "should get directions" do
+    get :directions
     assert_response :success
   end
 
