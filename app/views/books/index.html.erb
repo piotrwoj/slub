@@ -83,7 +83,7 @@ function cancel_reservation(book_id){
 $(function(){
   if(navigator.cookieEnabled){
     <% if my_book %>
-      make_reservation(<%= my_book.id %>, '<%= my_book.title %>', '<%= my_book.author %>');
+      make_reservation(<%= my_book.id %>, "<%= my_book.title %>", "<%= my_book.author %>");
     <% else %>
       cancel_reservation(-1);
     <% end %>

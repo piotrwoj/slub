@@ -1,5 +1,6 @@
 kalendarz z data na zdjeciu
+nasze zdjecie?
 	na liscie ksiazek napisane u gory co sie zarezerwowalo i opcja odrezerwowania przy tym
-jak dojechac samochodem opis
+	jak dojechac samochodem opis
 	na mapce znacznik przystanku minibusa
 	ostrzezenie o cookies? - chyba jednak nie
