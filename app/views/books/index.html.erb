@@ -1,5 +1,14 @@
 <%= flash_fields %>
 
+<div class="wierszyk2">
+<br>
+&ldquo;Zamiast kwiaty nam przynosić <br>
+Bowiem więdną z grawitacją <br>
+Dobrą książkę śmiemy prosić <br>
+Z własną wewnątrz dedykacją&rdquo; <br>
+<br>
+</div>
+
 <h2>Lista książek<%="(#{@books.size})" if admin? %></h2>
 
 <% my_book = Book.get_my(session)
