@@ -11,7 +11,7 @@ Z własną wewnątrz dedykacją&rdquo; <br>
 <br>
 </div>
 
-<h2>Lista książek<%="(#{@books.size})" if admin? %></h2>
+<h2>Proponowane książki<%="(#{@books.size})" if admin? %></h2>
 
 <% my_book = Book.get_my(session)
    session[:reservation_id] = nil unless my_book %>
@@ -88,7 +88,7 @@ function cancel_reservation(book_id){
   $(".make_reservation_button").show();
   if(book_id != -1)
     $('#cancel_reservation_button_' + book_id).hide();
-  $("#your_reservation").html("Nie zarezerwowałeś jeszcze książki");
+  $("#your_reservation").html("");//("Nie zarezerwowałeś jeszcze książki");
 }
 
 $(function(){
