@@ -118,6 +118,7 @@ fieldset{
 .books_table th, td {
 	width: 33%;
 	padding: 5px;
+	text-align: left;
 }
 
 .books_table_admin table {
@@ -127,6 +128,7 @@ fieldset{
 .books_table_admin th, td {
 	width: 25%;
 	padding: 5px;
+	text-align: left;
 }
 
 .reservations_table table {
