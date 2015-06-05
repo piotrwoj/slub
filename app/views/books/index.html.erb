@@ -11,7 +11,7 @@ Z własną wewnątrz dedykacją&rdquo; <br>
 <br>
 </div>
 
-<h2>Proponowane książki<%="(#{@books.size})" if admin? %></h2>
+<h2>Proponowane książki<%= admin? ? "(#{@books.size})" : "<big>&#9786</big>".html_safe %></h2>
 
 <% my_book = Book.get_my(session)
    session[:reservation_id] = nil unless my_book %>
