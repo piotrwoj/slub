@@ -34,12 +34,12 @@ body{
 	margin-bottom: 40px;
 }
 
-#photo{
+#flowers{
 	width: 100%;
 	height: 100%;
 }
 
-#photo_div{
+#flowers_div{
 	height: 300px;
 }
 
@@ -138,4 +138,12 @@ fieldset{
 .reservations_table th, td {
 	width: 25%;
 	padding: 5px;
+}
+
+#photo_div{
+	text-align: center;
+}
+
+#photo{
+	width: 70%;
 }

@@ -18,13 +18,10 @@ Z własną wewnątrz dedykacją&rdquo; <br>
 
 <% unless admin? %>
 <p>
-<div id="your_reservation">
-  <% if my_book %>
-    Twoja rezerwacja: "<%= my_book.title %>", <%= my_book.author %>
-  <% else %>
-    Nie zarezerwowałeś jeszcze książki
-  <% end %>
-</div>
+<big>
+<span id="your_reservation">
+</span>
+</big>
 </p>
 <% end %>
 
@@ -47,9 +44,9 @@ Z własną wewnątrz dedykacją&rdquo; <br>
         <td><%= book.author %></td>
         <td style="text-align:center">
           <% if book.reserved? && (book != my_book || admin?) %>
-            TAK
+            zarezerwowane
           <% else %>
-            <span id="not_reserved_mark_<%= book.id %>" class="not_reserved_mark">NIE</span>
+            <span id="not_reserved_mark_<%= book.id %>" class="not_reserved_mark">wolne</span>
             <%= button_to 'Anuluj rezerwację', cancel_reservation_book_url(book), remote: true, id: "cancel_reservation_button_#{book.id}", class: "hidden" %>
             <%= button_to 'Rezerwuj', make_reservation_book_url(book), remote: true, id: "make_reservation_button_#{book.id}", class: "hidden make_reservation_button" %>
           <% end %>
