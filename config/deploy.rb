@@ -42,7 +42,7 @@ namespace :deploy do
       #execute "ln -sf #{fetch :deploy_to}/current/config/nginx.conf /etc/nginx/sites-enabled/slub"
       execute "chmod a+x #{fetch :deploy_to}/current/config/unicorn_init.sh" #moze lepiej by to bylo w shared?
       #execute "ln -sf #{fetch :deploy_to}/current/config/unicorn_init.sh /etc/init.d/unicorn_slub"
-      execute "ln -sf #{fetch :deploy_to}/shared/production.sqlite3 #{fetch :deploy_to}/current/db/production.sqlite3"
+      #execute "ln -sf #{fetch :deploy_to}/shared/production.sqlite3 #{fetch :deploy_to}/current/db/production.sqlite3"
       execute "service unicorn_slub restart;" # service nginx restart
     end
   end
