@@ -100,6 +100,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
+    newrelic_rpm (3.12.0.288)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     rack (1.6.0)
@@ -186,6 +187,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
+  newrelic_rpm (>= 3.9.9.275)
   rails (= 4.2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

@@ -44,3 +44,5 @@ end
 
 gem 'capistrano-rails', group: :development
 gem 'capistrano-rbenv', "~> 2.0", group: :development
+
+gem 'newrelic_rpm', '>= 3.9.9.275', group: :production
