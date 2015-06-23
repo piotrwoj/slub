@@ -2,6 +2,8 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+#require File.expand_path('../../lib/my_middleware', __FILE__)
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -18,6 +20,8 @@ module Slub
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.autoload_paths << config.root.join('lib')
     config.i18n.default_locale = :pl
+    #config.middleware.use 'MyMiddleware'
   end
 end
