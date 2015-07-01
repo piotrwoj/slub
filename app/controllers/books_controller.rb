@@ -67,7 +67,7 @@ class BooksController < ApplicationController
       else
         if (reservation = @book.reservations.create(ip: request.ip))
           session[:reservation_id] = reservation.id
-          ReservationNotifier.reserved(reservation).deliver_now
+          #ReservationNotifier.reserved(reservation).deliver_now
           render js: "make_reservation(#{@book.id}, \"#{@book.title}\", \"#{@book.author}\")"
         else
           render js: "alert('Rezerwacja nie powiodła się!'); location.reload();"
@@ -86,7 +86,7 @@ class BooksController < ApplicationController
         reservation = Reservation.where(id: session[:reservation_id], canceled: false).first
         if reservation && reservation.update_attribute(:canceled, true)
           session[:reservation_id] = nil
-          ReservationNotifier.cancelled(reservation).deliver_now
+          #ReservationNotifier.cancelled(reservation).deliver_now
           render js: "cancel_reservation(#{@book.id})"
         else
           render js: "alert('Anulowanie rezerwacji nie powiodło się!'); location.reload();"
