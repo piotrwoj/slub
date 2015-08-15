@@ -11,7 +11,7 @@ Z własną wewnątrz dedykacją&rdquo; <br>
 <br>
 </div>
 
-<h2>Proponowane książki<%= admin? ? "(#{@books.size})" : "<big>&#9786</big>".html_safe %></h2>
+<h2>Proponowane książki<%= admin? ? "(#{@books.size}, zarezerwowano: #{Book.reserved_count})" : "<big>&#9786</big>".html_safe %></h2>
 
 <% my_book = Book.get_my(session)
    session[:reservation_id] = nil unless my_book %>
@@ -20,6 +20,7 @@ Z własną wewnątrz dedykacją&rdquo; <br>
 <p>
 <big>
 <span id="your_reservation">
+&nbsp;
 </span>
 </big>
 </p>
@@ -36,13 +37,12 @@ Z własną wewnątrz dedykacją&rdquo; <br>
       <% end %>
     </tr>
   </thead>
-
   <tbody>
     <% @books.each do |book| %>
       <tr id="tr<%= book.id %>">
         <td><%= book.title %><%#= link_to book.title, book %></td>
         <td><%= book.author %></td>
-        <td style="text-align:center">
+        <td style="text-align:center;height:25px">
           <% if book.reserved? && (book != my_book || admin?) %>
             zarezerwowane
           <% else %>
@@ -59,8 +59,6 @@ Z własną wewnątrz dedykacją&rdquo; <br>
         <%= link_to 'Usuń', book, remote: true, method: :delete, data: { confirm: 'Na pewno usunąć?' } %>
         </td>
         <% end %>
-
-      </tr>
     <% end %>
   </tbody>
 </table>
@@ -87,7 +85,7 @@ function cancel_reservation(book_id){
   $(".make_reservation_button").show();
   if(book_id != -1)
     $('#cancel_reservation_button_' + book_id).hide();
-  $("#your_reservation").html("");//("Nie zarezerwowałeś jeszcze książki");
+  $("#your_reservation").html("&nbsp;");//("Nie zarezerwowałeś jeszcze książki");
 }
 
 $(function(){

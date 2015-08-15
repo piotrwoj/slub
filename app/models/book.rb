@@ -27,6 +27,10 @@ class Book < ActiveRecord::Base
 		end
 	end
 
+	def self.reserved_count
+		Book.joins(:reservations).where(reservations: {canceled: false}).count
+	end
+
 
 	private
 
