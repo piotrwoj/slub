@@ -31,6 +31,16 @@ class Book < ActiveRecord::Base
 		Book.joins(:reservations).where(reservations: {canceled: false}).count
 	end
 
+	def get_tr_color
+		if self.reserved?
+			return 'green' if self.reservations.where(canceled: false).first.updated_at > Time.zone.now - 1.day
+		elsif self.reservations.any? && self.reservations.where(canceled: true).order("updated_at desc").first.updated_at > Time.zone.now - 1.day
+			return 'red'
+		else
+			return 'inherit'
+		end
+	end
+
 
 	private
 

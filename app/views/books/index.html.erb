@@ -42,7 +42,7 @@ Z własną wewnątrz dedykacją&rdquo; <br>
       <tr id="tr<%= book.id %>">
         <td><%= book.title %><%#= link_to book.title, book %></td>
         <td><%= book.author %></td>
-        <td style="text-align:center;height:25px">
+        <td style="text-align:center;height:25px<%= ";background-color:#{book.get_tr_color}" if admin? %>">
           <% if book.reserved? && (book != my_book || admin?) %>
             zarezerwowane
           <% else %>
