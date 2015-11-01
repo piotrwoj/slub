@@ -2,7 +2,7 @@
 
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :make_reservation, :cancel_reservation]
-  skip_before_filter :authorize, only: [:index, :show, :make_reservation, :cancel_reservation]
+  #skip_before_filter :authorize, only: [:index, :show, :make_reservation, :cancel_reservation]
 
   # GET /books
   # GET /books.json

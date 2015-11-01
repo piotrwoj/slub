@@ -2,7 +2,7 @@
 
 class MainController < ApplicationController
 
-	skip_before_filter :authorize, only: [:index, :directions]
+	#skip_before_filter :authorize, only: [:index, :directions]
 	
   def index
   end
